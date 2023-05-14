@@ -64,7 +64,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [504, 132.0]
+    coordinate: [584, 148.0]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0_0_1_0
@@ -80,7 +80,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [528, 300.0]
+    coordinate: [608, 316.0]
     rotation: 0
     state: enabled
 - name: audio_sink_0
@@ -97,7 +97,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1280, 124.0]
+    coordinate: [1360, 140.0]
     rotation: 0
     state: true
 - name: audio_source_0
@@ -116,7 +116,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [56, 212.0]
+    coordinate: [136, 228.0]
     rotation: 0
     state: disabled
 - name: blocks_complex_to_real_0
@@ -132,7 +132,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [912, 192.0]
+    coordinate: [992, 208.0]
     rotation: 0
     state: enabled
 - name: blocks_float_to_complex_0
@@ -148,7 +148,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 160.0]
+    coordinate: [392, 176.0]
     rotation: 0
     state: true
 - name: blocks_float_to_short_0
@@ -165,9 +165,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1280, 188.0]
+    coordinate: [1360, 204.0]
     rotation: 0
     state: true
+- name: blocks_float_to_short_0_0
+  id: blocks_float_to_short
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '32767'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [600, 508.0]
+    rotation: 0
+    state: disabled
 - name: blocks_multiply_xx_2_0
   id: blocks_multiply_xx
   parameters:
@@ -183,7 +200,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [784, 176.0]
+    coordinate: [864, 192.0]
     rotation: 0
     state: enabled
 - name: blocks_null_source_0
@@ -202,7 +219,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 272.0]
+    coordinate: [168, 288.0]
     rotation: 0
     state: true
 - name: blocks_vco_c_0_0
@@ -220,7 +237,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [896, 284.0]
+    coordinate: [976, 300.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_source_0
@@ -238,16 +255,35 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 148.0]
+    coordinate: [96, 164.0]
     rotation: 0
     state: true
+- name: blocks_wavfile_source_0_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: /home/cano/Desktop/seaTTY/rttywx/examples/rtty.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 500.0]
+    rotation: 0
+    state: disabled
 - name: freq_xlating_fir_filter_xxx_0_3_0
   id: freq_xlating_fir_filter_xxx
   parameters:
     affinity: ''
     alias: ''
     center_freq: '2000'
-    comment: ''
+    comment: "AFC branch. Although it works well with \na real SDR, this is not optimized\
+      \ for this\nexample. Use the disabled blocks in below\ninstead for optimum results."
     decim: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -258,7 +294,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [296, 276.0]
+    coordinate: [376, 292.0]
     rotation: 0
     state: enabled
 - name: gr_moving_average_xx_0_1_0
@@ -278,7 +314,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [712, 276.0]
+    coordinate: [792, 292.0]
     rotation: 0
     state: enabled
 - name: rational_resampler_xxx_0
@@ -298,7 +334,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1072, 164.0]
+    coordinate: [1152, 180.0]
     rotation: 0
     state: enabled
 - name: rttywx_rttywx_decode_0
@@ -315,9 +351,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1432, 188.0]
+    coordinate: [1512, 204.0]
     rotation: 0
     state: true
+- name: rttywx_rttywx_decode_0_0
+  id: rttywx_rttywx_decode
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    filename: ''
+    reverse: 'True'
+    samp_rate: '8000'
+    type: short
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 508.0]
+    rotation: 0
+    state: disabled
 
 connections:
 - [analog_agc3_xx_0, '0', blocks_multiply_xx_2_0, '0']
@@ -327,10 +380,12 @@ connections:
 - [blocks_complex_to_real_0, '0', rational_resampler_xxx_0, '0']
 - [blocks_float_to_complex_0, '0', analog_agc3_xx_0, '0']
 - [blocks_float_to_short_0, '0', rttywx_rttywx_decode_0, '0']
+- [blocks_float_to_short_0_0, '0', rttywx_rttywx_decode_0_0, '0']
 - [blocks_multiply_xx_2_0, '0', blocks_complex_to_real_0, '0']
 - [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
 - [blocks_vco_c_0_0, '0', blocks_multiply_xx_2_0, '1']
 - [blocks_wavfile_source_0, '0', blocks_float_to_complex_0, '0']
+- [blocks_wavfile_source_0_0, '0', blocks_float_to_short_0_0, '0']
 - [freq_xlating_fir_filter_xxx_0_3_0, '0', analog_quadrature_demod_cf_0_0_1_0, '0']
 - [gr_moving_average_xx_0_1_0, '0', blocks_vco_c_0_0, '0']
 - [rational_resampler_xxx_0, '0', audio_sink_0, '0']
