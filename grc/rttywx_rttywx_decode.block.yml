@@ -1,0 +1,63 @@
+id: rttywx_rttywx_decode
+label: RTTY WX decoder
+category: '[rttywx]'
+  
+parameters:
+-   id: type
+    label: Input Type
+    dtype: enum
+    options: [short]
+    option_attributes:
+        fcn: [s]
+    hide: part
+-   id: samp_rate
+    label: Sample Rate
+    dtype: int
+    default: samp_rate
+    options: ['8000', '11025', '16000', '22050', '24000', '32000', '44100', '48000']
+    option_labels: [8 kHz, 11.025 kHz, 16 kHz, 22.05 kHz, 24 kHz, 32 kHz, 44.1 kHz, 48 kHz]
+-   id: filename
+    label: Filename
+    dtype: string
+    hide: ${ ('none' if filename else 'part') }
+-   id: reverse
+    label: Reverse
+    dtype: enum
+    default: 'False'
+    options: ['True', 'False']
+    option_labels: ['Yes', 'No']
+    hide: part
+
+inputs:
+-   domain: stream
+    dtype: ${ type }
+
+templates:
+  imports: from gnuradio import rttywx
+  make: rttywx.rttywx_decode(${samp_rate}, ${filename}, ${reverse})
+  
+cpp_templates:
+    includes: [ '#include <gnuradio/rttywx/rttywx_decoder.h>' ]
+    declarations: 'rttywx::rttywx_decoder_${type.fcn}::sptr ${id};'
+    make: 'this->${id} = rttywx::rttywx_decoder_${type.fcn}::make(${samp_rate}, ${filename}, ${reverse});'
+    translations:
+        "'": '"'
+        'True': 'true'
+        'False': 'false'
+
+documentation: |-
+    The RTTY weather decoder Sink Block extracted from fldigi source code. It requires AFC for better stability.
+    Use 8000 sampling rate. Only decodes 50 baud +/- 225 Hz, stop bit length 1.5 bit with no parity bites.
+
+    Sample rate:
+
+    File name:
+    Name of the output file (leave empty for stdout)
+
+    Reverse:
+    Reverses mark and space (to be used when decoding on LSB instead of USB). RTTY weather from Germany is reversed.
+
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1
